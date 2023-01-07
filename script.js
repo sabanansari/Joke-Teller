@@ -7,17 +7,38 @@ const VoiceRSS={speech:function(e){this._validate(e),this._request(e)},_validate
 
 // 22831e8e92ee412480b63a27ca332196
 
-function test(){
-    VoiceRSS.speech({
-        key: '22831e8e92ee412480b63a27ca332196',
-        src: 'Hello, world!',
-        hl: 'en-us',
-        v: 'Linda',
-        r: 0, 
-        c: 'mp3',
-        f: '44khz_16bit_stereo',
-        ssml: false
-    });
-}
+// function test(){
+//     VoiceRSS.speech({
+//         key: '22831e8e92ee412480b63a27ca332196',
+//         src: 'Hello, world!',
+//         hl: 'en-us',
+//         v: 'Linda',
+//         r: 0, 
+//         c: 'mp3',
+//         f: '44khz_16bit_stereo',
+//         ssml: false
+//     });
+// }
 
-test();
+// test();
+
+// Get Jokes from Joke API
+
+async function getJokes(){
+
+    let joke = '';
+
+    try {
+        const response = await fetch('https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit');
+        const data = await response.json();
+
+        if(data.setup){
+            joke = `${data.setup} ... ${data.delivery}`;
+        }else{
+            joke = data.joke;
+        }
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
